@@ -1,0 +1,77 @@
+<template>
+    <div class="{{$style.default['pay']}}">
+        <div class="{{$style.default['pay-header']}}">
+            <div s-for="item, index in payHeaderList" on-click="setActivePayHeaderIndex(index)">
+                <router-link to="{{item.url}}" style="{{activePayHeaderIndex === index ? 'background:#f1d801;' : ''}}">{{item.text}}</router-link>
+            </div>
+        </div>
+        <div class="{{$style.default['pay-body']}}">
+            <div s-is="route.query.name"></div>
+        </div>
+    </div>
+</template>
+
+<script>
+import {Component} from 'san';
+import {axios, getReqUrl} from '../../server';
+import {Buy, Download, Order} from './components';
+import {Link} from '../../router';
+
+export default class Pay extends Component {
+    static components =  {
+        'router-link': Link,
+        'buy': Buy,
+        'order': Order,
+        'download': Download
+    }
+
+    initData() {
+        return {
+            payHeaderList: [
+                {
+                    url: '/pay/buy',
+                    text: '购买'
+                },
+                {
+                    url: '/pay/order',
+                    text: '我的订单'
+                },
+                {
+                    url: '/pay/download',
+                    text: '下载订单'
+                },
+            ],
+            activePayHeaderIndex: 0
+        }
+    }
+
+    setActivePayHeaderIndex(index) {
+        this.data.set('activePayHeaderIndex', index);
+    }
+
+
+};
+</script>
+
+<style lang="less" module>
+    .pay {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        width: 100%;
+        background: blanchedalmond;
+        height: 100%;
+        .pay-header {
+            width: 100%;
+            background: pink;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+        .pay-body {
+            width: 100%;
+            height: 100%;
+        }
+    }
+</style>>

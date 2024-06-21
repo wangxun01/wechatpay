@@ -1,0 +1,107 @@
+<template>
+    <div class="{{$style.default['app']}}">
+        <div class="{{$style.default['app-header']}}">
+            <div s-for="item, index in headerList" on-click="setActiveHeaderIndex(index)" class="{{$style.default['app-header-item']}}">
+                <router-link to="{{item.url}}" style="{{activeHeaderIndex === index ? 'background:#f38f00;' : ''}}">{{item.text}}</router-link>
+            </div>
+        </div>
+        <div class="{{$style.default['app-body']}}">
+            <div id="main" class="{{$style.default['main-container']}}"></div>
+        </div>
+        <div class="{{$style.default['app-footer']}}">网站footer</div>
+    </div>
+</template>
+
+<script>
+import {Component} from 'san';
+import {Link} from './router';
+
+export default class App extends Component {
+    static components =  {
+        'router-link': Link
+    }
+
+    initData() {
+        return {
+            headerList: [
+                {
+                    url: '/',
+                    text: '首页'
+                },
+                {
+                    url: '/',
+                    text: '论坛'
+                },
+                {
+                    url: '/',
+                    text: '3D展馆'
+                },
+                {
+                    url: '/',
+                    text: '登录/注册'
+                },
+                {
+                    url: '/pay/buy',
+                    text: '充值'
+                },
+            ],
+            activeHeaderIndex: 0
+        }
+    }
+
+    created() {
+    }
+
+    setActiveHeaderIndex(index) {
+        this.data.set('activeHeaderIndex', index);
+    }
+};
+</script>
+
+<style lang="less" module>
+    .app {
+        width: 400px;
+        height: 600px;
+        background: pink;
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        margin: auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        a {
+            text-decoration: none;
+            color: white
+        }
+        .app-header {
+            height: 40px;
+            display: flex;
+            flex-wrap: none;
+            justify-content: space-around;
+            align-items: center;
+            background: gray;
+            .app-header-item {
+                padding: 2px;
+                border-radius: 5px;
+                border: none;
+            }
+        }
+        .app-body {
+            flex: 2;
+            background: wheat;
+            width: 100%;
+            height: 100%;
+            .main-container {
+                height: 100%;
+            }
+        }
+        .app-footer {
+            background: grey;
+            text-align: center;
+            height: 20px;
+            padding: 2px;
+        }
+    }
+</style>>

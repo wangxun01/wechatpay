@@ -1,0 +1,25 @@
+<template>
+    <div>
+        订单组件
+    </div>
+</template>
+
+<script>
+import {Component} from 'san';
+
+export default class Order extends Component {
+    static components =  {
+    }
+
+    initData() {
+        return {
+        }
+    }
+
+    created() {
+    }
+};
+</script>
+
+<style lang="less" module>
+</style>>

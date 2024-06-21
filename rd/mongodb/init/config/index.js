@@ -1,0 +1,3 @@
+const MongodbApi = {};
+
+export {MongodbApi}
